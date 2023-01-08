@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import { CliCommandInterface } from './cli-command.interface.js';
 
 export default class HelpCommand implements CliCommandInterface {
@@ -5,16 +6,16 @@ export default class HelpCommand implements CliCommandInterface {
 
   public async execute(): Promise<void> {
     console.log(`
-        Программа для подготовки данных для REST API сервера.  
+    ${chalk.green.bold.underline ('Программа для подготовки данных для REST API сервера.')}  
 
-        Пример: cli.js --<command> [--arguments]
+    ${chalk.italic('Пример: cli.js --<command> [--arguments]')} 
         
-        Команды:
+    ${chalk.bgGreen.bold('Команды:')} 
         
-        --version:                   # выводит номер версии
-        --help:                      # печатает этот текст
-        --import <path>:             # импортирует данные из TSV
-        --generate <n> <path> <url>  # генерирует произвольное количество тестовых данных
+        ${chalk.bold.greenBright('--version:')}                   ${chalk.whiteBright.italic('# выводит номер версии')}
+        ${chalk.bold.greenBright('--help:')}                      ${chalk.whiteBright.italic('# печатает этот текст')}
+        ${chalk.bold.greenBright('--import <path>:')}             ${chalk.whiteBright.italic('# импортирует данные из TSV')}
+        ${chalk.bold.greenBright('--generate <n> <path> <url>')}  ${chalk.whiteBright.italic('# генерирует произвольное количество тестовых данных')}
         `);
   }
 }

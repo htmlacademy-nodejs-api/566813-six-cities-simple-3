@@ -1,3 +1,6 @@
-export const offerTypes = ['Appartment', 'House', 'Room', 'Hotel'];
-
-export type OfferType = typeof offerTypes[number];
+export enum OfferType {
+    Apartment = 'Apartment',
+    House = 'House',
+    Room = 'Room',
+    Hotel = 'Hotel'
+}
