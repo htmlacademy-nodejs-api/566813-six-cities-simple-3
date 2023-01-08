@@ -43,28 +43,28 @@ export default class TSVFileReader implements FileReaderInterface {
         locationLongitude
       ]) => {
 
-        const foundCity = cities.find(el => el === city);
+        const foundCity = cities.find((el) => (el === city));
 
         return {
-        title,
-        description,
-        postDate: new Date(postDate),
-        city: foundCity || 'Amsterdam',
-        previewImage,
-        detailImage: detailImage.split(';'),
-        isPremium: Boolean(Number(isPremium)),
-        rating: Number.parseInt(rating, 10),
-        offerType: OfferType[offerType as 'Apartment' | 'House' | 'Room' | 'Hotel'],
-        roomsNumber: Number.parseInt(roomsNumber, 10),
-        guestsNumber: Number.parseInt(guestsNumber, 10),
-        price: Number.parseInt(price, 10),
-        features: features.split(';').map((name) => (FeaturesType[name as 'Breakfast' | 'AirConditioning' | 'LaptopFriendlyWorkspace' | 'BabySeat' | 'Washer' | 'Towels' | 'Fridge'])),
-        userId,
-        commentsNumber: Number.parseInt(commentsNumber, 10),
-        location: {
-          latitude:  Number.parseFloat(locationLatitude),
-          longitude:  Number.parseFloat(locationLongitude)
-        }
+          title,
+          description,
+          postDate: new Date(postDate),
+          city: foundCity || 'Amsterdam',
+          previewImage,
+          detailImage: detailImage.split(';'),
+          isPremium: Boolean(Number(isPremium)),
+          rating: Number.parseInt(rating, 10),
+          offerType: OfferType[offerType as 'Apartment' | 'House' | 'Room' | 'Hotel'],
+          roomsNumber: Number.parseInt(roomsNumber, 10),
+          guestsNumber: Number.parseInt(guestsNumber, 10),
+          price: Number.parseInt(price, 10),
+          features: features.split(';').map((name) => (FeaturesType[name as 'Breakfast' | 'AirConditioning' | 'LaptopFriendlyWorkspace' | 'BabySeat' | 'Washer' | 'Towels' | 'Fridge'])),
+          userId,
+          commentsNumber: Number.parseInt(commentsNumber, 10),
+          location: {
+            latitude:  Number.parseFloat(locationLatitude),
+            longitude:  Number.parseFloat(locationLongitude)
+          }
         };
       });
   }
