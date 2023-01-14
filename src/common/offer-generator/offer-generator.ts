@@ -27,7 +27,7 @@ const MIN_COMMENTS_NUMBER = 0;
 const MAX_COMMENTS_NUMBER = 500;
 
 const MIN_GEOGRAPHICAL_DEGREES = 0;
-const MAX_GEOGRAPHICAL_DEGREES = 180;
+const MAX_GEOGRAPHICAL_DEGREES = 90;
 
 export default class OfferGenerator implements OfferGeneratorInterface {
   constructor(private readonly mockData: MockData) {}
@@ -46,10 +46,10 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const guestsNumber = generateRandomValue(MIN_GUESTS_NUMBER, MAX_GUESTS_NUMBER).toString();
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const features = getRandomItems<string>(this.mockData.features).join(';');
-    const userId = uuidv4().toSting();
+    const userId = uuidv4().toString();
     const commentsNumber = generateRandomValue(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER).toString();
-    const locationLatitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES).toString();
-    const locationLongitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES).toString();
+    const locationLatitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
+    const locationLongitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
     return [
       title, description, postDate,
       city, previewImage, detailImage, isPremium,
