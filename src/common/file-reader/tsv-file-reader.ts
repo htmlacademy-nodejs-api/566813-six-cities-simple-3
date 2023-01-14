@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 import { Offer } from '../../types/offer.type.js';
 import { FileReaderInterface } from './file-reader.interface.js';
 import { cities } from '../../types/city-type.type.js';
-import { OfferType } from '../../types/offer-type.type.js';
+import { OfferType } from '../../types/offer-type.enum.js';
 import { FeaturesType } from '../../types/features-type.enum.js';
 
 export default class TSVFileReader implements FileReaderInterface {
