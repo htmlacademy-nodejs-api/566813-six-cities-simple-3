@@ -12,7 +12,7 @@ const FIRST_MONTH_DAY = 1;
 const LAST_MONTH_DAY = 31;
 
 const FALSE = 0;
-const TRUE  = 1;
+const TRUE = 1;
 
 const MIN_RATE = 1;
 const MAX_RATE = 5;
@@ -35,7 +35,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
   public generate(): string {
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
-    const postDate = dayjs().subtract(generateRandomValue(FIRST_MONTH_DAY, LAST_MONTH_DAY), 'day').toISOString();;
+    const postDate = dayjs().subtract(generateRandomValue(FIRST_MONTH_DAY, LAST_MONTH_DAY), 'day').toISOString();
     const city = getRandomItem<string>(this.mockData.cities);
     const previewImage = getRandomItem<string>(this.mockData.previewImages);
     const detailImage = getRandomItems<string>(this.mockData.detailImages).join(';');
