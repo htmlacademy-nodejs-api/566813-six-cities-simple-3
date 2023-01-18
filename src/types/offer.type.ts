@@ -1,5 +1,5 @@
 import { City } from './city-type.type.js';
-import { OfferType } from './offer-type.type.js';
+import { OfferType } from './offer-type.enum.js';
 import { LocationType } from './location-type.type.js';
 import { FeaturesType } from './features-type.enum.js';
 
