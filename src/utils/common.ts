@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { OfferType } from '../types/offer-type.enum.js';
 import { Offer } from '../types/offer.type.js';
-import { cities } from '../types/city-type.type.js';
+import { City } from '../types/city-type.type.js';
 import { FeaturesType } from '../types/features-type.enum.js';
 
 export const createOffer = (row: string) => {
@@ -26,13 +26,11 @@ export const createOffer = (row: string) => {
     locationLongitude
   ] = tokens;
 
-  const foundCity = cities.find((el) => (el === city));
-
   return {
     title,
     description,
     postDate: new Date(postDate),
-    city: foundCity || 'Amsterdam',
+    city: City[city as 'Amsterdam' | 'Brussels' | 'Cologne' | 'Dusseldorf' | 'Hamburg' | 'Paris'],
     previewImage,
     detailImage: detailImage.split(';'),
     isPremium: Boolean(isPremium),

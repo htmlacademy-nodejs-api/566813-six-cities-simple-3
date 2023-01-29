@@ -16,57 +16,92 @@ export interface OfferEntity extends defaultClasses.Base {}
 })
 
 export class OfferEntity extends defaultClasses.TimeStamps {
-  @prop({trim: true, required: true})
+  @prop({
+    trim: true,
+    required: true,
+    minlength: 10,
+    maxlength: 100})
   public title!: string;
 
-  @prop({trim: true, required: true})
+  @prop({
+    trim: true,
+    required: true,
+    minlength: 20,
+    maxlength: 1024
+  })
   public description!: string;
 
-  @prop({required: true})
+  @prop({
+    required: true
+  })
   public postDate!: Date;
 
   @prop({
+    trim: true,
+    required: true,
     type: () => String,
-    required: true
+    enum: City
   })
   public city!: City;
 
-  @prop({required: true})
+  @prop({
+    required: true
+  })
   public previewImage!: string;
 
-  @prop({required: true})
+  @prop({
+    required: true
+  })
   public dateilImage!: string[];
 
-  @prop({required: true})
+  @prop({
+    required: true
+  })
   public isPremium!: boolean;
 
-  @prop({required: true})
+  @prop({
+    required: true,
+    min: 1,
+    max: 5
+})
   public rating!: number;
 
   @prop({
+    trim: true,
+    required: true,
     type: () => String,
     enum: OfferType
   })
   public offerType!: OfferType;
 
-  @prop({required: true})
+  @prop({
+    required: true,
+    min: 1,
+    max: 8})
   public roomsNumber!: number;
 
-  @prop({required: true})
+  @prop({
+    required: true,
+    min: 1,
+    max: 10})
   public guestsNumber!: number;
 
-  @prop({required: true})
+  @prop({
+    required: true,
+    min: 100,
+    max: 100000})
   public price!: number;
 
   @prop({
+    required: true,
     default: [],
-    required: true
+    type: () => String
   })
   public features!: FeaturesType[];
 
   @prop({
-    ref: UserEntity,
-    required: true
+    required: true,
+    ref: UserEntity
   })
   public userId!: Ref<UserEntity>;
 
@@ -74,8 +109,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public commentsNumber?: number;
 
   @prop({
-    type: () => String,
-    enum: OfferType
+    required: true
   })
   public location!: LocationType;
 }
