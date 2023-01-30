@@ -1,7 +1,7 @@
 import crypto from 'crypto';
 import { OfferType } from '../types/offer-type.enum.js';
 import { Offer } from '../types/offer.type.js';
-import { City } from '../types/city-type.type.js';
+import { City } from '../types/city-type.enum.js';
 import { FeaturesType } from '../types/features-type.enum.js';
 
 export const createOffer = (row: string) => {
@@ -20,7 +20,11 @@ export const createOffer = (row: string) => {
     guestsNumber,
     price,
     features,
-    userId,
+    name,
+    email,
+    avatarPath,
+    password,
+    userType,
     commentsNumber,
     locationLatitude,
     locationLongitude
@@ -40,7 +44,13 @@ export const createOffer = (row: string) => {
     guestsNumber: Number.parseInt(guestsNumber, 10),
     price: Number.parseInt(price, 10),
     features: features.split(';').map((name) => (FeaturesType[name as 'Breakfast' | 'AirConditioning' | 'LaptopFriendlyWorkspace' | 'BabySeat' | 'Washer' | 'Towels' | 'Fridge'])),
-    userId,
+    user: {
+      name,
+      email,
+      avatarPath,
+      password,
+      userType,
+    },
     commentsNumber: Number.parseInt(commentsNumber, 10),
     location: {
       latitude:  Number.parseFloat(locationLatitude),

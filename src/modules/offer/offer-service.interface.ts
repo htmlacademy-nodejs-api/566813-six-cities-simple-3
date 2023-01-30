@@ -2,7 +2,7 @@ import CreateOfferDto from './dto/create-offer.dto.js';
 import {DocumentType} from '@typegoose/typegoose';
 import { OfferEntity } from './offer.entity.js';
 
-export interface CategoryServiceInterface {
+export interface OfferServiceInterface {
   create(dto: CreateOfferDto): Promise<DocumentType<OfferEntity>>;
   findById(categoryId: string): Promise<DocumentType<OfferEntity> | null>;
 }

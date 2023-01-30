@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
-import {v4 as uuidv4} from 'uuid';
 import { MockData } from '../../types/mock-data.type.js';
 import { OfferType } from '../../types/offer-type.enum.js';
+import { UserType } from '../../types/user-types.type.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../utils/random.js';
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 
@@ -46,16 +46,36 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const guestsNumber = generateRandomValue(MIN_GUESTS_NUMBER, MAX_GUESTS_NUMBER).toString();
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const features = getRandomItems<string>(this.mockData.features).join(';');
-    const userId = uuidv4().toString();
+    const name = getRandomItem<string>(this.mockData.names);
+    const email = getRandomItem<string>(this.mockData.emails);
+    const avatarPath = getRandomItem<string>(this.mockData.avatarPaths);
+    const password = 'testtesttest';
+    const userType =  Object.keys(UserType)[generateRandomValue(0, Object.keys(UserType).length - 1)];
     const commentsNumber = generateRandomValue(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER).toString();
     const locationLatitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
     const locationLongitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
     return [
-      title, description, postDate,
-      city, previewImage, detailImage, isPremium,
-      rating, offerType, roomsNumber, guestsNumber,
-      price, features, userId, commentsNumber,
-      locationLatitude, locationLongitude
+      title,
+      description,
+      postDate,
+      city,
+      previewImage,
+      detailImage,
+      isPremium,
+      rating,
+      offerType,
+      roomsNumber,
+      guestsNumber,
+      price,
+      features,
+      name,
+      email,
+      avatarPath,
+      password,
+      userType,
+      commentsNumber,
+      locationLatitude,
+      locationLongitude
     ].join('\t');
   }
 }
