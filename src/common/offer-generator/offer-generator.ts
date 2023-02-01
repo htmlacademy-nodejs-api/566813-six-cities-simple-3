@@ -5,8 +5,10 @@ import { UserType } from '../../types/user-types.type.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../utils/random.js';
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 
+const DETAIL_IMAGES_NUMBER = 6;
+
 const MIN_PRICE = 100;
-const MAX_PRICE = 3000;
+const MAX_PRICE = 100000;
 
 const FIRST_MONTH_DAY = 1;
 const LAST_MONTH_DAY = 31;
@@ -18,10 +20,10 @@ const MIN_RATE = 1;
 const MAX_RATE = 5;
 
 const MIN_ROOMS_NUMBER = 1;
-const MAX_ROOMS_NUMBER = 9;
+const MAX_ROOMS_NUMBER = 8;
 
 const MIN_GUESTS_NUMBER = 1;
-const MAX_GUESTS_NUMBER = 50;
+const MAX_GUESTS_NUMBER = 10;
 
 const MIN_COMMENTS_NUMBER = 0;
 const MAX_COMMENTS_NUMBER = 500;
@@ -38,7 +40,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const postDate = dayjs().subtract(generateRandomValue(FIRST_MONTH_DAY, LAST_MONTH_DAY), 'day').toISOString();
     const city = getRandomItem<string>(this.mockData.cities);
     const previewImage = getRandomItem<string>(this.mockData.previewImages);
-    const detailImage = getRandomItems<string>(this.mockData.detailImages).join(';');
+    const detailImage = this.mockData.detailImages.slice(0, DETAIL_IMAGES_NUMBER).join(';');
     const isPremium = Boolean(generateRandomValue(FALSE, TRUE)).toString();
     const rating = generateRandomValue(MIN_RATE, MAX_RATE).toString();
     const offerType = Object.keys(OfferType)[generateRandomValue(0, Object.keys(OfferType).length - 1)];
