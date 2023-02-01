@@ -19,5 +19,5 @@ export default class CreateOfferDto {
   public features!: FeaturesType[];
   public userId!: string;
   public commentsNumber?: number;
-  public location!: LocationType
+  public location!: LocationType;
 }

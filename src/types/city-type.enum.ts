@@ -1,4 +1,4 @@
-import { LocationType } from "./location-type.type";
+import { LocationType } from './location-type.type';
 
 export enum City {
   Amsterdam = 'Amsterdam',

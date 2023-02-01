@@ -13,7 +13,7 @@ export default class Application {
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface
-    ) {}
+  ) {}
 
   public async init() {
     this.logger.info('Application initialization...');

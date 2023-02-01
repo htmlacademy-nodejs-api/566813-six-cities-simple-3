@@ -15,7 +15,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   constructor(data: User) {
     super();
 
-    this.name = data.name
+    this.name = data.name;
     this.email = data.email;
     this.avatarPath = data.avatarPath;
     this.password = data.password;
@@ -35,7 +35,7 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
   public password!: string;
 
   @prop({required: true, default: ''})
-  public userType!: string
+  public userType!: string;
 
   public setPassword(password: string, salt: string) {
     this.password = createSHA256(password, salt);
