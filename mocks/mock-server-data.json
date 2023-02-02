@@ -56,12 +56,6 @@
         "detail-image-9.jpg",
         "detail-image-10.jpg"
       ],
-      "offerTypes": [
-        "Apartment",
-        "House",
-        "Room",
-        "Hotel"
-      ],
       "features": [
         "Breakfast",
         "AirConditioning",
@@ -70,6 +64,44 @@
         "Washer",
         "Towels",
         "Fridge"
+      ],
+      "names": [
+        "Troy Lawrence",
+        "Sara Williams",
+        "Stacey Kelly",
+        "Shawn Moore",
+        "Laura Garza",
+        "Margaret Evans",
+        "Katherine Hill",
+        "Frank Smith",
+        "Shirley Cooper",
+        "Mary Rivera"
+      ],
+      "emails": [
+        "htonys@example.com",
+        "niallo@example.com",
+        "ctavakil@example.com",
+        "tctr@example.com",
+        "oresto@example.com",
+        "laylence@example.com",
+        "iellen@example.com",
+        "wafarsh@example.com",
+        "ssomas@example.com",
+        "fton@example.com"
+      ],
+      "avatarPaths": [
+        "avatar-1.png",
+        "avatar-2.png",
+        "avatar-3.png",
+        "avatar-4.png",
+        "avatar-5.png",
+        "avatar-6.png",
+        "avatar-7.png",
+        "avatar-8.png",
+        "avatar-9.png",
+        "avatar-10.png",
+        "avatar-11.png",
+        "avatar-12.png"
       ]
     }
   }
