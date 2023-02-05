@@ -14,6 +14,10 @@ import {UserModel} from '../modules/user/user.entity.js';
 import {Offer} from '../types/offer.type.js';
 import {LoggerInterface} from '../common/logger/logger.interface.js';
 import {DatabaseInterface} from '../common/database-client/database.interface.js';
+import { CommentServiceInterface } from '../modules/comment/comment-service.interface.js';
+import CommentService from '../modules/comment/comment.service.js';
+import { CommentModel } from '../modules/comment/comment.entity.js';
+import { Comment } from '../types/comment.type.js';
 
 const DEFAULT_DB_PORT = 27017;
 const DEFAULT_USER_PASSWORD = 'password';
@@ -22,6 +26,7 @@ export default class ImportCommand implements CliCommandInterface {
   public readonly name = '--import';
   private userService!: UserServiceInterface;
   private offerService!: OfferServiceInterface;
+  private commentService!: CommentServiceInterface;
   private databaseService!: DatabaseInterface;
   private logger: LoggerInterface;
   private salt!: string;
@@ -33,6 +38,7 @@ export default class ImportCommand implements CliCommandInterface {
     this.logger = new ConsoleLoggerService();
     this.offerService = new OfferService(this.logger, OfferModel);
     this.userService = new UserService(this.logger, UserModel);
+    this.commentService = new CommentService (this.logger, CommentModel);
     this.databaseService = new DatabaseService(this.logger);
   }
 
@@ -42,15 +48,37 @@ export default class ImportCommand implements CliCommandInterface {
       password: DEFAULT_USER_PASSWORD
     }, this.salt);
 
-    await this.offerService.create({
+    return await this.offerService.create({
       ...offer,
       userId: user.id,
     });
   }
 
+  private async saveComment(comment: Comment) {
+    await this.commentService.create({
+      ...comment
+    });
+  }
+
   private async onLine(line: string, resolve: () => void) {
     const offer = createOffer(line);
-    await this.saveOffer(offer);
+    const user = await this.userService.findOrCreate({
+      ...offer.user,
+      password: DEFAULT_USER_PASSWORD
+    }, this.salt);
+    const createdOffer = await this.saveOffer(offer);
+
+    if (createdOffer) {
+      const comment: Comment = {
+        text: createdOffer.description,
+        postDate: createdOffer.postDate,
+        rating: createdOffer.rating,
+        userId: user.id,
+        offerId: createdOffer.id,
+      };
+      await this.saveComment(comment);
+    }
+
     resolve();
   }
 

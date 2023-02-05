@@ -34,7 +34,7 @@ export default class Application {
     await this.databaseClient.connect(uri);
 
     //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac');
-    const offers = await this.offerService.find(3);
+    const offers = await this.offerService.find();
     console.log(offers);
 
   }
