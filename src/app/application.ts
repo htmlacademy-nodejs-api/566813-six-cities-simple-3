@@ -7,12 +7,16 @@ import {getURI} from '../utils/db.js';
 import {DatabaseInterface} from '../common/database-client/database.interface.js';
 
 
+import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js';
+
+
 @injectable()
 export default class Application {
   constructor(
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
-    @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface
+    @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
+    @inject(Component.OfferServiceInterface) private offerService: OfferServiceInterface
   ) {}
 
   public async init() {
@@ -28,5 +32,10 @@ export default class Application {
     );
 
     await this.databaseClient.connect(uri);
+
+    //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac');
+    const offers = await this.offerService.find();
+    console.log(offers);
+
   }
 }

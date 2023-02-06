@@ -54,6 +54,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const password = 'testtesttest';
     const userType = Object.keys(UserType)[generateRandomValue(0, Object.keys(UserType).length - 1)];
     const commentsNumber = generateRandomValue(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER).toString();
+    const commentText = getRandomItem<string>(this.mockData.commentsText);
     const locationLatitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
     const locationLongitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
     return [
@@ -76,6 +77,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
       password,
       userType,
       commentsNumber,
+      commentText,
       locationLatitude,
       locationLongitude
     ].join('\t');

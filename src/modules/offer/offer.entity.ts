@@ -1,4 +1,4 @@
-import typegoose, {defaultClasses, getModelForClass, Ref} from '@typegoose/typegoose';
+import typegoose, {defaultClasses, getModelForClass, Ref, Severity} from '@typegoose/typegoose';
 import { OfferType } from '../../types/offer-type.enum.js';
 import { UserEntity } from '../user/user.entity.js';
 import { FeaturesType } from '../../types/features-type.enum.js';
@@ -51,8 +51,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
 
   @prop({
     required: true,
-    minlength: 6,
-    maxlength: 6
+    allowMixed: Severity.ALLOW
   })
   public detailImage!: string[];
 
@@ -111,7 +110,8 @@ export class OfferEntity extends defaultClasses.TimeStamps {
   public commentsNumber?: number;
 
   @prop({
-    required: true
+    required: true,
+    allowMixed: Severity.ALLOW
   })
   public location!: LocationType;
 }

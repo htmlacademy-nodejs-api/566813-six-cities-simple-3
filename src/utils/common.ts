@@ -26,6 +26,8 @@ export const createOffer = (row: string) => {
     password,
     userType,
     commentsNumber,
+    commentText,
+    commentDate,
     locationLatitude,
     locationLongitude
   ] = tokens;
@@ -52,12 +54,15 @@ export const createOffer = (row: string) => {
       userType,
     },
     commentsNumber: Number.parseInt(commentsNumber, 10),
+    commentText,
+    commentDate: new Date(commentDate),
     location: {
       latitude:  Number.parseFloat(locationLatitude),
       longitude:  Number.parseFloat(locationLongitude)
     }
   } as Offer;
 };
+
 
 export const getErrorMessage = (error: unknown): string =>
   error instanceof Error ? error.message : '';
