@@ -12,9 +12,9 @@ Content-Type: application/json
 {
   "email": "torans@overlook.net",
   "avatarPath": "torrance.png",
-  "firstname": "Jack",
-  "lastname": "Torrance",
-  "password": "shining"
+  "name": "Jack",
+  "password": "shining",
+  "userType": "Pro"
 }
 
 ###

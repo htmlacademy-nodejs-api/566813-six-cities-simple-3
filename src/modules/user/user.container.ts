@@ -1,4 +1,3 @@
-
 import {Container} from 'inversify';
 import {UserServiceInterface} from './user-service.interface.js';
 import UserService from './user.service.js';
