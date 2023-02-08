@@ -41,7 +41,7 @@ export default class OfferService implements OfferServiceInterface {
           },
         },
         {
-          $set:
+          $addFields:
           {
             id: { $toString: '$_id' },
             rating: { $round: [{ $avg: '$comments.rating' }, 1] },
@@ -76,7 +76,7 @@ export default class OfferService implements OfferServiceInterface {
           },
         },
         {
-          $set:
+          $addFields:
           {
             id: { $toString: '$_id' },
             rating: { $round: [{ $avg: '$comments.rating' }, 1] },

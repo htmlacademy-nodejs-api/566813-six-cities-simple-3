@@ -30,3 +30,75 @@ Content-Type: application/json
 }
 
 ###
+
+# Объявления
+## Объявление по идентификатору
+
+GET http://localhost:4000/offers/62711a50b0e24a624d49ffdc HTTP/1.1
+
+###
+
+## Список объявлений
+
+GET http://localhost:4000/offers HTTP/1.1
+
+
+###
+
+## Создание объявления
+
+POST http://localhost:4000/offers HTTP/1.1
+Content-Type: application/json
+
+{
+    "title": "Хата для вписок",
+    "description": "В удобных нишах в коридоре могут разместятся прихожая и гардероб. Кухня с местом для компактного гарнитура станет для вас, дополнительным помещением. А на балконе можно сидеть вечерами, с кружечкой чая и вызывать зависть у жильцов из дома напротив.Неподалёку находится вся нужная инфраструктура.",
+    "postDate": "2023-02-04T18:16:38.972Z",
+    "city": "Paris",
+    "previewImage": "preview-image-1.jpg",
+    "detailImage": [
+      "detail-image-1.jpg",
+      "detail-image-2.jpg",
+      "detail-image-3.jpg",
+      "detail-image-4.jpg",
+      "detail-image-5.jpg",
+      "detail-image-6.jpg"
+    ],
+    "isPremium": true,
+    "rating": 4,
+    "offerType": "Hotel",
+    "roomsNumber": 2,
+    "guestsNumber": 3,
+    "price": 27600,
+    "features": [
+      "Washer",
+      "Towels",
+      "Fridge"
+    ],
+    "userId": "62823cb2c5a64ce9f1b50ec8",
+    "location": {
+      "latitude": 50.938361,
+      "longitude": 6.959974
+    }
+  }
+
+###
+
+## Удаление объявления
+
+DELETE http://localhost:4000/offers/63df8b0335e67b50174ce4ac HTTP/1.1
+
+###
+
+## Обновление объявления
+
+PATCH http://localhost:4000/offers/63df8b0335e67b50174ce4b1 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Ночной дозор 3тест",
+  "description": "Проверка обновления тест",
+  "previewImage": "картинка обновлена",
+  "offerType": "Flat",
+  "price": 1100
+}
