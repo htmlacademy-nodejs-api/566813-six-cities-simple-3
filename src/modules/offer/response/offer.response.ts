@@ -50,7 +50,7 @@ export default class OfferResponse {
   public user!: UserResponse;
 
   @Expose()
-  public commentNumber!: number;
+  public commentsNumber!: number;
 
   @Expose()
   public location!: LocationType;
