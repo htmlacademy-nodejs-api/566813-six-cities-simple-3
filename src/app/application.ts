@@ -10,7 +10,7 @@ import { ControllerInterface } from '../common/controller/controller.interface.j
 import {ExceptionFilterInterface} from '../common/errors/exception-filter.interface.js';
 
 
-import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js'; //для тестов
+//import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js'; //для тестов
 
 
 @injectable()
@@ -21,7 +21,7 @@ export default class Application {
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
-    @inject(Component.OfferServiceInterface) private offerService: OfferServiceInterface,
+    //@inject(Component.OfferServiceInterface) private offerService: OfferServiceInterface,
     @inject(Component.UserController) private userController: ControllerInterface,
     @inject(Component.ExceptionFilterInterface) private exceptionFilter: ExceptionFilterInterface,
     @inject(Component.OfferController) private offerController: ControllerInterface,
@@ -66,8 +66,8 @@ export default class Application {
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
 
     //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac'); //для тестирования
-    const offers = await this.offerService.find(); //для тестирования
-    console.log(offers); //для тестирования
+    // const offers = await this.offerService.find(); //для тестирования
+    //console.log(offers); //для тестирования
 
   }
 }
