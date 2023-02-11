@@ -7,7 +7,7 @@
 .idea/*
 /mocks/*.tsv
 /mongodb
-/upload
+/upload/
 
 .DS_Store
 coverage

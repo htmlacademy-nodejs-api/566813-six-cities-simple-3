@@ -39,6 +39,10 @@ export default class Application {
 
   public initMiddleware() {
     this.expressApp.use(express.json());
+    this.expressApp.use(
+      '/upload',
+      express.static(this.config.get('UPLOAD_DIRECTORY'))
+    );
   }
 
   public initExceptionFilters() {
@@ -64,6 +68,7 @@ export default class Application {
     this.initExceptionFilters();
     this.expressApp.listen(this.config.get('PORT'));
     this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
+
 
     //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac'); //для тестирования
     // const offers = await this.offerService.find(); //для тестирования
