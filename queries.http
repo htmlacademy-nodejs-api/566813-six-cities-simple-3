@@ -10,7 +10,7 @@ POST http://localhost:4000/users/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "email": "torans@overlook.net",
+  "email": "toranso@verlofok.net",
   "avatarPath": "torrance.png",
   "name": "Jack",
   "password": "shining",
@@ -114,7 +114,7 @@ Content-Type: application/json
 {
   "text": "Шумные ли соседи? И можно ли с домашними животными?",
   "rating": 5,
-  "offerId": "63df8b0335e67b50174ce4b1",
+  "offerId": "63dff690a7597c9b34045e61",
   "userId": "63df8b0335e67b50174ce4aa"
 }
 
