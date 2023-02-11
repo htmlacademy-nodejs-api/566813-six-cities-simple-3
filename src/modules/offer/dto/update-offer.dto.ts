@@ -1,7 +1,7 @@
-import { City } from "../../../types/city-type.enum";
-import { FeaturesType } from "../../../types/features-type.enum";
-import { OfferType } from "../../../types/offer-type.enum";
-import { LocationType } from "../../../types/location-type.type";
+import { City } from '../../../types/city-type.enum';
+import { FeaturesType } from '../../../types/features-type.enum';
+import { OfferType } from '../../../types/offer-type.enum';
+import { LocationType } from '../../../types/location-type.type';
 
 export default class UpdateOfferDto {
   public title?: string;
@@ -16,5 +16,5 @@ export default class UpdateOfferDto {
   public guestsNumber?: number;
   public price?: number;
   public features?: FeaturesType[];
-  public location?: LocationType
+  public location?: LocationType;
 }
