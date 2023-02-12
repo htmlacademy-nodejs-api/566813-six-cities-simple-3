@@ -9,6 +9,7 @@ import express, {Express} from 'express';
 import { ControllerInterface } from '../common/controller/controller.interface.js';
 import {ExceptionFilterInterface} from '../common/errors/exception-filter.interface.js';
 import {AuthenticateMiddleware} from '../common/middlewares/authenticate.middleware.js';
+import {getFullServerPath} from '../utils/common.js';
 
 
 //import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js'; //для тестов
@@ -44,6 +45,10 @@ export default class Application {
       '/upload',
       express.static(this.config.get('UPLOAD_DIRECTORY'))
     );
+    this.expressApp.use(
+      '/static',
+      express.static(this.config.get('STATIC_DIRECTORY_PATH'))
+    );
     const authenticateMiddleware = new AuthenticateMiddleware(this.config.get('JWT_SECRET'));
     this.expressApp.use(authenticateMiddleware.execute.bind(authenticateMiddleware));
   }
@@ -70,7 +75,7 @@ export default class Application {
     this.initRoutes();
     this.initExceptionFilters();
     this.expressApp.listen(this.config.get('PORT'));
-    this.logger.info(`Server started on http://localhost:${this.config.get('PORT')}`);
+    this.logger.info(`Server started on ${getFullServerPath(this.config.get('HOST'), this.config.get('PORT'))}`);
 
 
     //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac'); //для тестирования
