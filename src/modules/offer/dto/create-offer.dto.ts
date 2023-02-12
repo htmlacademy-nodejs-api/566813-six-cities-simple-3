@@ -10,7 +10,6 @@ import {
   IsDateString,
   IsEnum,
   IsInt,
-  IsMongoId,
   Length,
   Max,
   MaxLength,
@@ -66,7 +65,6 @@ export default class CreateOfferDto {
   @IsEnum(FeaturesType, {each: true, message: 'Features must be a value from FeaturesType list'})
   public features!: FeaturesType[];
 
-  @IsMongoId({message: 'userId field must be valid an id'})
   public userId!: string;
 
   @IsNotEmptyObject({}, {message: '"Location" field must be an object'})
