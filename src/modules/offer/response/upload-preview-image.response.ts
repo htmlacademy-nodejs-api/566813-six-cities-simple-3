@@ -1,6 +1,6 @@
 import {Expose} from 'class-transformer';
 
-export default class UploadImageResponse {
+export default class UploadPreviewImageResponse {
   @Expose()
   public previewImage!: string;
 }

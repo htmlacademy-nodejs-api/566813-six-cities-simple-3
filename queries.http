@@ -106,13 +106,13 @@ Content-Type: application/json
 
 ###
 
-## Загрузка изображения для предложения
-POST http://localhost:4000/offers/63e92ce918d2c8a8ab523e7f/image HTTP/1.1
+## Загрузка превью-изображения для предложения
+POST http://localhost:4000/offers/63e92ce918d2c8a8ab523e7f/image/preview HTTP/1.1
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZTg5Y2M5OTM5ZGI2YTQ4Yzg2ZjUyZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MjI1NzIyLCJleHAiOjE2NzYzOTg1MjJ9.MTBPr1K3A8oaF01oXfcFVbLvCvPVj4JJ0OLZYvPzevg
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
-Content-Disposition: form-data; name="image"; filename="avatar.png"
+Content-Disposition: form-data; name="previewImage"; filename="avatar.png"
 Content-Type: image/png
 
 < /Users/tmp/avatar.png
@@ -120,6 +120,54 @@ Content-Type: image/png
 
 ###
 
+## Загрузка детальных изображения для предложения
+POST http://localhost:4000/offers/63e92ce918d2c8a8ab523e7f/image/detail HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZTg5Y2M5OTM5ZGI2YTQ4Yzg2ZjUyZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MjI1NzIyLCJleHAiOjE2NzYzOTg1MjJ9.MTBPr1K3A8oaF01oXfcFVbLvCvPVj4JJ0OLZYvPzevg
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
+Content-Type: image/png
+
+< /Users/tmp/avatar.png
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+###
 ## Удаление объявления
 
 DELETE http://localhost:4000/offers/63df8b0335e67b50174ce4ac HTTP/1.1

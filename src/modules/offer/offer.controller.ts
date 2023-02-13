@@ -20,10 +20,12 @@ import {DocumentExistsMiddleware} from '../../common/middlewares/document-exists
 import {PrivateRouteMiddleware} from '../../common/middlewares/private-route.middleware.js';
 import {ConfigInterface} from '../../common/config/config.interface.js';
 import {UploadFileMiddleware} from '../../common/middlewares/upload-file.middleware.js';
-import UploadImageResponse from './response/upload-image.response.js';
+import UploadPreviewImageResponse from './response/upload-preview-image.response.js';
+import UploadDetailImageResponse from './response/upload-detail-image.response.js';
 
 type ParamsGetOffer = {
   offerId: string;
+  files: string;
 }
 
 @injectable()
@@ -82,16 +84,28 @@ export default class OfferController extends Controller {
       handler: this.getComments,
       middlewares: [
         new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')]
+        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')
+      ]
     });
     this.addRoute({
-      path: '/:offerId/image',
+      path: '/:offerId/image/preview',
       method: HttpMethod.Post,
-      handler: this.uploadImage,
+      handler: this.uploadPreviewImage,
       middlewares: [
         new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
-        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'image'),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'previewImage')
+      ]
+    });
+///тест //////////////////////////////
+    this.addRoute({
+      path: '/:offerId/image/detail',
+      method: HttpMethod.Post,
+      handler: this.uploadDetailImage,
+      middlewares: [
+        new PrivateRouteMiddleware(),
+        new ValidateObjectIdMiddleware('offerId'),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'detailImage')
       ]
     });
   }
@@ -115,8 +129,6 @@ export default class OfferController extends Controller {
     req: Request<Record<string, unknown>, Record<string, unknown>, CreateOfferDto>,
     res: Response
   ): Promise<void> {
-    console.log(req); // тестreq
-    console.log(res); // тестres
     const {body, user} = req;
     const result = await this.offerService.create({...body, userId: user.id});
     const offer = await this.offerService.findById(result.id);
@@ -160,12 +172,19 @@ export default class OfferController extends Controller {
     this.ok(res, fillDTO(CommentResponse, comments));
   }
 
-  public async uploadImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
+  public async uploadPreviewImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
     const {offerId} = req.params;
-    console.log(req.file?.filename);
+    console.log(req.file?.filename); /// тест
     const updateDto = { previewImage: req.file?.filename };
 
     await this.offerService.updateById(offerId, updateDto);
-    this.created(res, fillDTO(UploadImageResponse, {updateDto}));
+    this.created(res, fillDTO(UploadPreviewImageResponse, {updateDto}));
+  }
+/////////////////////////////////тест
+  public async uploadDetailImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
+    const { offerId } = req.params;
+    const updateDto = { detailImage: req.params.files.trimEnd().split(' ') };
+    await this.offerService.updateById(offerId, updateDto);
+    this.created(res, fillDTO(UploadDetailImageResponse, { ...updateDto }));
   }
 }
