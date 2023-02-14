@@ -37,9 +37,9 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiL
 
 ###
 
-## Отправка аватарки пользователю
+## Отправка аватарки пользователя
 
-POST http://localhost:4000/users/63df8b0335e67b50174ce4aa/avatar HTTP/1.1
+POST http://localhost:4000/users/63eb29ab973676accc2e5b8f/avatar HTTP/1.1
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -108,7 +108,7 @@ Content-Type: application/json
 
 ## Загрузка превью-изображения для предложения
 POST http://localhost:4000/offers/63e92ce918d2c8a8ab523e7f/image/preview HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZTg5Y2M5OTM5ZGI2YTQ4Yzg2ZjUyZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MjI1NzIyLCJleHAiOjE2NzYzOTg1MjJ9.MTBPr1K3A8oaF01oXfcFVbLvCvPVj4JJ0OLZYvPzevg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZWIyOWFiOTczNjc2YWNjYzJlNWI4ZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MzU2MDI2LCJleHAiOjE2NzY1Mjg4MjZ9.AkfxnNueUbkcvTyPhTnClUR-Ej-DHggSVG81MTeneT4
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -120,9 +120,9 @@ Content-Type: image/png
 
 ###
 
-## Загрузка детальных изображения для предложения
+## Загрузка детальных изображений для предложения
 POST http://localhost:4000/offers/63e92ce918d2c8a8ab523e7f/image/detail HTTP/1.1
-Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZTg5Y2M5OTM5ZGI2YTQ4Yzg2ZjUyZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MjI1NzIyLCJleHAiOjE2NzYzOTg1MjJ9.MTBPr1K3A8oaF01oXfcFVbLvCvPVj4JJ0OLZYvPzevg
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJlbWFpbCI6InRvcmFuc29AdGVzdC5uZXQiLCJpZCI6IjYzZWIyOWFiOTczNjc2YWNjYzJlNWI4ZiIsInVzZXJUeXBlIjoiUHJvIiwiaWF0IjoxNjc2MzU2MDI2LCJleHAiOjE2NzY1Mjg4MjZ9.AkfxnNueUbkcvTyPhTnClUR-Ej-DHggSVG81MTeneT4
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
 ------WebKitFormBoundary7MA4YWxkTrZu0gW
@@ -137,34 +137,29 @@ Content-Type: image/png
 
 < /Users/tmp/avatar.png
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
+------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
 Content-Type: image/png
 
 < /Users/tmp/avatar.png
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
+------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
 Content-Type: image/png
 
 < /Users/tmp/avatar.png
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
+------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
 Content-Type: image/png
 
 < /Users/tmp/avatar.png
 
-------WebKitFormBoundary7MA4YWxkTrZu0gW--
-
+------WebKitFormBoundary7MA4YWxkTrZu0gW
 Content-Disposition: form-data; name="detailImage"; filename="avatar.png"
 Content-Type: image/png
 
 < /Users/tmp/avatar.png
-
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
 ###

@@ -40,6 +40,7 @@ export class UploadFileMiddleware implements MiddlewareInterface {
   ) { }
 
   public async execute(req: Request, res: Response, next: NextFunction): Promise<void> {
+    console.log('ЗАПУСК MIDDLEWARE ЗАПУСК MIDDLEWARE ЗАПУСК MIDDLEWARE ЗАПУСК MIDDLEWARE ЗАПУСК MIDDLEWARE ЗАПУСК MIDDLEWARE ');
     req.params.files = '';
     const storage = diskStorage({
       destination: this.uploadDirectory,
@@ -51,9 +52,19 @@ export class UploadFileMiddleware implements MiddlewareInterface {
       }
     });
 
+    ////////////////////////////тест
+console.log('STORAGE');
+console.log(storage);
+
     const uploadFilesMiddleware = multer({ storage })
       .array(this.fieldName);
 
+          ////////////////////////////тест
+          console.log('UPLOADfILESmIDDLEWARE');
+console.log(uploadFilesMiddleware);
+
+console.log('NEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXT');
+console.log(next);
     uploadFilesMiddleware(req, res, next);
   }
 }

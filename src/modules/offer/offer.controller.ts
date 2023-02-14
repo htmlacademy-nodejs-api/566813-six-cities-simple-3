@@ -174,16 +174,16 @@ export default class OfferController extends Controller {
 
   public async uploadPreviewImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
     const {offerId} = req.params;
-    console.log(req.file?.filename); /// тест
-    const updateDto = { previewImage: req.file?.filename };
+    const updateDto = { previewImage: req.params.files };
 
     await this.offerService.updateById(offerId, updateDto);
-    this.created(res, fillDTO(UploadPreviewImageResponse, {updateDto}));
+    this.created(res, fillDTO(UploadPreviewImageResponse, {...updateDto}));
   }
-/////////////////////////////////тест
+
   public async uploadDetailImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
     const { offerId } = req.params;
     const updateDto = { detailImage: req.params.files.trimEnd().split(' ') };
+
     await this.offerService.updateById(offerId, updateDto);
     this.created(res, fillDTO(UploadDetailImageResponse, { ...updateDto }));
   }
