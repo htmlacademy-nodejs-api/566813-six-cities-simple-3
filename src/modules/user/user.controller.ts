@@ -18,7 +18,7 @@ import {UploadFileMiddleware} from '../../common/middlewares/upload-file.middlew
 import LoggedUserResponse from './response/logged-user.response.js';
 import {JWT_ALGORITM} from './user.constant.js';
 import UploadUserAvatarResponse from './response/upload-user-avatar.response.js';
-
+import { PrivateRouteMiddleware } from '../../common/middlewares/private-route.middleware.js';
 
 @injectable()
 export default class UserController extends Controller {
@@ -47,6 +47,7 @@ export default class UserController extends Controller {
       method: HttpMethod.Post,
       handler: this.uploadAvatar,
       middlewares: [
+        new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('userId'),
         new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar'),
       ]
@@ -104,7 +105,8 @@ export default class UserController extends Controller {
 
   public async uploadAvatar(req: Request, res: Response) {
     const {userId} = req.params;
-    const uploaFile = {avatarPath: req.file?.filename};
+    const uploaFile = {avatarPath: req.params.files};
+
     await this.userService.updateById(userId, uploaFile);
     this.created(res, fillDTO(UploadUserAvatarResponse, uploaFile));
   }
