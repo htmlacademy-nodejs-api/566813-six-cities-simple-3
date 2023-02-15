@@ -53,7 +53,7 @@ export class OfferEntity extends defaultClasses.TimeStamps {
     required: true,
     allowMixed: Severity.ALLOW
   })
-  public detailImage!: string[];
+  public detailImages!: string[];
 
   @prop({
     required: true

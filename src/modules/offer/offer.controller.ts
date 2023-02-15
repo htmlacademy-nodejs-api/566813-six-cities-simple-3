@@ -1,3 +1,4 @@
+import * as core from 'express-serve-static-core';
 import {inject, injectable} from 'inversify';
 import {StatusCodes} from 'http-status-codes';
 import {Request, Response} from 'express';
@@ -6,7 +7,6 @@ import {Component} from '../../types/component.types.js';
 import {LoggerInterface} from '../../common/logger/logger.interface.js';
 import {HttpMethod} from '../../types/http-method.enum.js';
 import HttpError from '../../common/errors/http-error.js';
-import * as core from 'express-serve-static-core';
 import {OfferServiceInterface} from './offer-service.interface.js';
 import {fillDTO} from '../../utils/common.js';
 import OfferResponse from './response/offer.response.js';
@@ -21,7 +21,7 @@ import {PrivateRouteMiddleware} from '../../common/middlewares/private-route.mid
 import {ConfigInterface} from '../../common/config/config.interface.js';
 import {UploadFileMiddleware} from '../../common/middlewares/upload-file.middleware.js';
 import UploadPreviewImageResponse from './response/upload-preview-image.response.js';
-import UploadDetailImageResponse from './response/upload-detail-image.response.js';
+import UploaddetailImagesResponse from './response/upload-detail-image.response.js';
 
 type ParamsGetOffer = {
   offerId: string;
@@ -100,11 +100,11 @@ export default class OfferController extends Controller {
     this.addRoute({
       path: '/:offerId/image/detail',
       method: HttpMethod.Post,
-      handler: this.uploadDetailImage,
+      handler: this.uploaddetailImages,
       middlewares: [
         new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
-        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'detailImage')
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'detailImages')
       ]
     });
   }
@@ -179,11 +179,11 @@ export default class OfferController extends Controller {
     this.created(res, fillDTO(UploadPreviewImageResponse, {...updateDto}));
   }
 
-  public async uploadDetailImage(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
+  public async uploaddetailImages(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
     const { offerId } = req.params;
-    const updateDto = { detailImage: req.params.files.trimEnd().split(' ') };
+    const updateDto = { detailImages: req.params.files.trimEnd().split(' ') };
 
     await this.offerService.updateById(offerId, updateDto);
-    this.created(res, fillDTO(UploadDetailImageResponse, { ...updateDto }));
+    this.created(res, fillDTO(UploaddetailImagesResponse, { ...updateDto }));
   }
 }

@@ -15,6 +15,7 @@ export type ConfigSchema = {
   JWT_SECRET: string;
   STATIC_DIRECTORY_PATH: string;
   HOST: string;
+  DEFAULT_USER_PASSWORD: string;
 }
 
 export const configSchema = convict<ConfigSchema>({
@@ -83,5 +84,11 @@ export const configSchema = convict<ConfigSchema>({
     format: String,
     env: 'HOST',
     default: 'localhost'
-  }
+  },
+  DEFAULT_USER_PASSWORD: {
+    doc: 'Database connection password (MongoDB)',
+    format: String,
+    env: 'DEFAULT_USER_PASSWORD',
+    default: null,
+  },
 });

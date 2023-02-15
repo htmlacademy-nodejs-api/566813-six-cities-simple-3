@@ -12,9 +12,6 @@ import {AuthenticateMiddleware} from '../common/middlewares/authenticate.middlew
 import {getFullServerPath} from '../utils/common.js';
 
 
-//import { OfferServiceInterface } from '../modules/offer/offer-service.interface.js'; //для тестов
-
-
 @injectable()
 export default class Application {
   private expressApp: Express;
@@ -23,7 +20,6 @@ export default class Application {
     @inject(Component.LoggerInterface) private logger: LoggerInterface,
     @inject(Component.ConfigInterface) private config: ConfigInterface,
     @inject(Component.DatabaseInterface) private databaseClient: DatabaseInterface,
-    //@inject(Component.OfferServiceInterface) private offerService: OfferServiceInterface,
     @inject(Component.UserController) private userController: ControllerInterface,
     @inject(Component.ExceptionFilterInterface) private exceptionFilter: ExceptionFilterInterface,
     @inject(Component.OfferController) private offerController: ControllerInterface,
@@ -76,11 +72,5 @@ export default class Application {
     this.initExceptionFilters();
     this.expressApp.listen(this.config.get('PORT'));
     this.logger.info(`Server started on ${getFullServerPath(this.config.get('HOST'), this.config.get('PORT'))}`);
-
-
-    //const offers = await this.offerService.findById('63df8b0335e67b50174ce4ac'); //для тестирования
-    // const offers = await this.offerService.find(); //для тестирования
-    //console.log(offers); //для тестирования
-
   }
 }
