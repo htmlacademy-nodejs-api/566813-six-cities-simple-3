@@ -34,7 +34,6 @@ export const createOffer = (row: string) => {
     userType,
     commentsNumber,
     commentText,
-    commentDate,
     locationLatitude,
     locationLongitude
   ] = tokens;
@@ -62,7 +61,6 @@ export const createOffer = (row: string) => {
     },
     commentsNumber: Number.parseInt(commentsNumber, 10),
     commentText,
-    commentDate: new Date(commentDate),
     location: {
       latitude:  Number.parseFloat(locationLatitude),
       longitude:  Number.parseFloat(locationLongitude)

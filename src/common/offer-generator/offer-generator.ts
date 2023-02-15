@@ -31,7 +31,10 @@ const MAX_COMMENTS_NUMBER = 500;
 const MIN_GEOGRAPHICAL_DEGREES = 0;
 const MAX_GEOGRAPHICAL_DEGREES = 90;
 
+const PASSWORD_SAMPLE = 'testpassword';
+
 export default class OfferGenerator implements OfferGeneratorInterface {
+  
   constructor(private readonly mockData: MockData) {}
 
   public generate(): string {
@@ -51,7 +54,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const name = getRandomItem<string>(this.mockData.names);
     const email = getRandomItem<string>(this.mockData.emails);
     const avatarPath = getRandomItem<string>(this.mockData.avatarPaths);
-    const password = 'testtesttest';
+    const password = PASSWORD_SAMPLE;
     const userType = Object.keys(UserType)[generateRandomValue(0, Object.keys(UserType).length - 1)];
     const commentsNumber = generateRandomValue(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER).toString();
     const commentText = getRandomItem<string>(this.mockData.commentsText);

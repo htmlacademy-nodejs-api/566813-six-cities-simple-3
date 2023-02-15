@@ -18,9 +18,8 @@ import { CommentServiceInterface } from '../modules/comment/comment-service.inte
 import CommentService from '../modules/comment/comment.service.js';
 import { CommentModel } from '../modules/comment/comment.entity.js';
 import { Comment } from '../types/comment.type.js';
+import ConfigService from '../common/config/config.service.js';
 
-const DEFAULT_DB_PORT = 27017;
-const DEFAULT_USER_PASSWORD = 'password';
 
 export default class ImportCommand implements CliCommandInterface {
   public readonly name = '--import';
@@ -30,6 +29,7 @@ export default class ImportCommand implements CliCommandInterface {
   private databaseService!: DatabaseInterface;
   private logger: LoggerInterface;
   private salt!: string;
+  private config: ConfigService;
 
   constructor() {
     this.onLine = this.onLine.bind(this);
@@ -40,12 +40,13 @@ export default class ImportCommand implements CliCommandInterface {
     this.userService = new UserService(this.logger, UserModel);
     this.commentService = new CommentService (this.logger, CommentModel);
     this.databaseService = new DatabaseService(this.logger);
+    this.config = new ConfigService(this.logger);
   }
 
   private async saveOffer(offer: Offer) {
     const user = await this.userService.findOrCreate({
       ...offer.user,
-      password: DEFAULT_USER_PASSWORD
+      password: this.config.get('DEFAULT_USER_PASSWORD')
     }, this.salt);
 
     return await this.offerService.create({
@@ -64,7 +65,7 @@ export default class ImportCommand implements CliCommandInterface {
     const offer = createOffer(line);
     const user = await this.userService.findOrCreate({
       ...offer.user,
-      password: DEFAULT_USER_PASSWORD
+      password: this.config.get('DEFAULT_USER_PASSWORD')
     }, this.salt);
     const createdOffer = await this.saveOffer(offer);
 
@@ -88,7 +89,7 @@ export default class ImportCommand implements CliCommandInterface {
   }
 
   public async execute(filename: string, login: string, password: string, host: string, dbname: string, salt: string): Promise<void> {
-    const uri = getURI(login, password, host, DEFAULT_DB_PORT, dbname);
+    const uri = getURI(login, password, host, this.config.get('DB_PORT'), dbname);
     this.salt = salt;
 
     await this.databaseService.connect(uri);

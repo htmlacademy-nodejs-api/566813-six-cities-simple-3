@@ -55,10 +55,6 @@ export abstract class Controller implements ControllerInterface {
   }
 
   public created<T>(res: Response, data: T): void {
-    console.log('ЗАПУСК ФУКНЦИИ createdЗАПУСК ФУКНЦИИ createdЗАПУСК ФУКНЦИИ createdЗАПУСК ФУКНЦИИ createdЗАПУСК ФУКНЦИИ created');
-    /////////////////////////////////////тест
-    console.log('data');
-    console.log(data);
     this.send(res, StatusCodes.CREATED, data);
   }
 
