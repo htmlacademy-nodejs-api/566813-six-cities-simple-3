@@ -22,7 +22,7 @@ export default class OfferResponse {
   public previewImage!: string;
 
   @Expose()
-  public detailImage!: string[];
+  public detailImages!: string[];
 
   @Expose()
   public isPremium!: boolean;

@@ -34,7 +34,6 @@ const MAX_GEOGRAPHICAL_DEGREES = 90;
 const PASSWORD_SAMPLE = 'testpassword';
 
 export default class OfferGenerator implements OfferGeneratorInterface {
-  
   constructor(private readonly mockData: MockData) {}
 
   public generate(): string {
@@ -43,7 +42,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
     const postDate = dayjs().subtract(generateRandomValue(FIRST_MONTH_DAY, LAST_MONTH_DAY), 'day').toISOString();
     const city = getRandomItem<string>(this.mockData.cities);
     const previewImage = getRandomItem<string>(this.mockData.previewImages);
-    const detailImage = this.mockData.detailImages.slice(0, DETAIL_IMAGES_NUMBER).join(';');
+    const detailImages = this.mockData.detailImages.slice(0, DETAIL_IMAGES_NUMBER).join(';');
     const isPremium = Boolean(generateRandomValue(FALSE, TRUE)).toString();
     const rating = generateRandomValue(MIN_RATE, MAX_RATE).toString();
     const offerType = Object.keys(OfferType)[generateRandomValue(0, Object.keys(OfferType).length - 1)];
@@ -66,7 +65,7 @@ export default class OfferGenerator implements OfferGeneratorInterface {
       postDate,
       city,
       previewImage,
-      detailImage,
+      detailImages,
       isPremium,
       rating,
       offerType,

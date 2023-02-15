@@ -40,11 +40,11 @@ export default class UpdateOfferDto {
   public previewImage?: string;
 
   @IsOptional()
-  @IsArray({ message: 'Field "detailImage" must be an array' })
+  @IsArray({ message: 'Field "detailImages" must be an array' })
   @ArrayMinSize(6, { message: 'previewImage should only contain 6 values' })
   @ArrayMaxSize(6, { message: 'previewImage should only contain 6 values' })
   @MaxLength(256, {each: true, message: 'Too short for field "previewImage"'})
-  public detailImage?: string[];
+  public detailImages?: string[];
 
   @IsOptional()
   @IsBoolean({message: 'isPremium must be "true" or "false"'})

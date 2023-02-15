@@ -1,10 +1,10 @@
 import crypto from 'crypto';
+import * as jose from 'jose';
 import { OfferType } from '../types/offer-type.enum.js';
 import { Offer } from '../types/offer.type.js';
 import { City } from '../types/city-type.enum.js';
 import { FeaturesType } from '../types/features-type.enum.js';
 import {plainToInstance, ClassConstructor} from 'class-transformer';
-import * as jose from 'jose';
 import {ValidationError} from 'class-validator';
 import {ValidationErrorField} from '../types/validation-error-field.type';
 import {ServiceError} from '../types/service-error.enum.js';
@@ -44,7 +44,7 @@ export const createOffer = (row: string) => {
     postDate: new Date(postDate),
     city: City[city as 'Amsterdam' | 'Brussels' | 'Cologne' | 'Dusseldorf' | 'Hamburg' | 'Paris'],
     previewImage,
-    detailImage: detailImages.split(';'),
+    detailImages: detailImages.split(';'),
     isPremium: Boolean(isPremium),
     rating: Number.parseInt(rating, 10),
     offerType: OfferType[offerType as 'Apartment' | 'House' | 'Room' | 'Hotel'],
