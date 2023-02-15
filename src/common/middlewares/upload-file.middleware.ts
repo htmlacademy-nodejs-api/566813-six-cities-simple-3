@@ -52,19 +52,8 @@ export class UploadFileMiddleware implements MiddlewareInterface {
       }
     });
 
-    ////////////////////////////тест
-console.log('STORAGE');
-console.log(storage);
-
     const uploadFilesMiddleware = multer({ storage })
       .array(this.fieldName);
-
-          ////////////////////////////тест
-          console.log('UPLOADfILESmIDDLEWARE');
-console.log(uploadFilesMiddleware);
-
-console.log('NEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXTNEXT');
-console.log(next);
     uploadFilesMiddleware(req, res, next);
   }
 }

@@ -82,11 +82,11 @@ export const createSHA256 = (line: string, salt: string): string => {
 export const fillDTO = <T, V>(someDto: ClassConstructor<T>, plainObject: V) =>
   plainToInstance(someDto, plainObject, {excludeExtraneousValues: true});
 
-  export const createErrorObject = (serviceError: ServiceError, message: string, details: ValidationErrorField[] = []) => ({
-    errorType: serviceError,
-    message,
-    details: [...details]
-  });
+export const createErrorObject = (serviceError: ServiceError, message: string, details: ValidationErrorField[] = []) => ({
+  errorType: serviceError,
+  message,
+  details: [...details]
+});
 
 export const createJWT = async (algoritm: string, jwtSecret: string, payload: object): Promise<string> =>
   new jose.SignJWT({...payload})
@@ -101,7 +101,7 @@ export const transformErrors = (errors: ValidationError[]): ValidationErrorField
     property,
     value,
     messages: constraints ? Object.values(constraints) : []
-}));
+  }));
 
 export const getFullServerPath = (host: string, port: number) => `http://${host}:${port}`;
 
@@ -122,13 +122,6 @@ export const transformProperty = (
     });
 };
 
-// export const transformObject = (properties: string[], staticPath: string, uploadPath: string, data:UnknownObject) => {
-//   properties
-//     .forEach((property) => transformProperty(property, data, (target: UnknownObject) => {
-//       const rootPath = DEFAULT_STATIC_IMAGES.includes(target[property] as string) ? staticPath : uploadPath;
-//       target[property] = `${rootPath}/${target[property]}`;
-//     }));
-// };
 export const transformObject = (properties: string[], staticPath: string, uploadPath: string, data: UnknownObject) => {
   properties
     .forEach((property) => transformProperty(property, data, (target: UnknownObject) => {

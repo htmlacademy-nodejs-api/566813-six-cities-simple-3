@@ -97,7 +97,6 @@ export default class OfferController extends Controller {
         new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'previewImage')
       ]
     });
-///тест //////////////////////////////
     this.addRoute({
       path: '/:offerId/image/detail',
       method: HttpMethod.Post,
