@@ -16,13 +16,14 @@ import {
   Min,
   IsNotEmptyObject
 } from 'class-validator';
+import { OfferConstraints } from '../../../utils/constraints.js';
 
 
 export default class CreateOfferDto {
-  @Length(1, 100, {message: 'Min title length is 10, max is 100'})
+  @Length(OfferConstraints.TitleMinLength, OfferConstraints.TitleMaxLength, {message: 'Min title length is 10, max is 100'})
   public title!: string;
 
-  @Length(20, 1024, {message: 'Min description length is 20, max is 1024'})
+  @Length(OfferConstraints.DescriptionMinLength, OfferConstraints.DescriptionMaxLength, {message: 'Min description length is 20, max is 1024'})
   public description!: string;
 
   @IsDateString({}, {message: 'postDate must be valid ISO date'})
@@ -31,13 +32,13 @@ export default class CreateOfferDto {
   @IsEnum(City, {message: 'City must be "Paris", "Cologne", "Brussels ", "Amsterdam ", "Hamburg", "Dusseldorf"'})
   public city!: City;
 
-  @MaxLength(256, {message: 'Too short for field "previewImage"'})
+  @MaxLength(OfferConstraints.PreviewImageMaxLength, {message: 'Too long for field "previewImage"'})
   public previewImage!: string;
 
   @IsArray({ message: 'Field "detailImages" must be an array' })
-  @ArrayMinSize(6, { message: 'previewImage should only contain 6 values' })
-  @ArrayMaxSize(6, { message: 'previewImage should only contain 6 values' })
-  @MaxLength(256, {each: true, message: 'Too short for field "previewImage"'})
+  @ArrayMinSize(OfferConstraints.DetaileImagesMinCount, { message: 'previewImage should only contain 6 values' })
+  @ArrayMaxSize(OfferConstraints.DetaileImagesMaxCount, { message: 'previewImage should only contain 6 values' })
+  @MaxLength(OfferConstraints.DetailImageMaxLength, {each: true, message: 'Too long for field "previewImage"'})
   public detailImages!: string[];
 
   @IsBoolean({message: 'isPremium must be "true" or "false"'})
@@ -47,18 +48,18 @@ export default class CreateOfferDto {
   public offerType!: OfferType;
 
   @IsInt({message: 'RoomsNumber must be an integer'})
-  @Min(1, {message: 'Minimum roomsNumber is  1'})
-  @Max(8, {message: 'Maximum roomsNumber is 8'})
+  @Min(OfferConstraints.RoomsNumberMin, {message: 'Minimum roomsNumber is 1'})
+  @Max(OfferConstraints.RoomsNumberMax, {message: 'Maximum roomsNumber is 8'})
   public roomsNumber!: number;
 
   @IsInt({message: 'GuestsNumber must be an integer'})
-  @Min(1, {message: 'Minimum guestsNumber is  1'})
-  @Max(10, {message: 'Maximum guestsNumber is 10'})
+  @Min(OfferConstraints.GuestsNumberMin, {message: 'Minimum guestsNumber is  1'})
+  @Max(OfferConstraints.GuestsNumberMax, {message: 'Maximum guestsNumber is 10'})
   public guestsNumber!: number;
 
   @IsInt({message: 'Price must be an integer'})
-  @Min(100, {message: 'Minimum price is 100'})
-  @Max(100000, {message: 'Maximum price is 100 000'})
+  @Min(OfferConstraints.PriceMin, {message: 'Minimum price is 100'})
+  @Max(OfferConstraints.PriceMax, {message: 'Maximum price is 100000'})
   public price!: number;
 
   @IsArray({message: 'Field "features" must be an array' })
