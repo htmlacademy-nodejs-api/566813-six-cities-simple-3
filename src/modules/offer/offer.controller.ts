@@ -100,7 +100,7 @@ export default class OfferController extends Controller {
     this.addRoute({
       path: '/:offerId/image/detail',
       method: HttpMethod.Post,
-      handler: this.uploaddetailImages,
+      handler: this.uploadDetailImages,
       middlewares: [
         new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
@@ -179,7 +179,7 @@ export default class OfferController extends Controller {
     this.created(res, fillDTO(UploadPreviewImageResponse, {...updateDto}));
   }
 
-  public async uploaddetailImages(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
+  public async uploadDetailImages(req: Request<core.ParamsDictionary | ParamsGetOffer>, res: Response) {
     const { offerId } = req.params;
     const updateDto = { detailImages: req.params.files.trimEnd().split(' ') };
 
