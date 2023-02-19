@@ -10,6 +10,7 @@ import HttpError from '../../common/errors/http-error.js';
 import {StatusCodes} from 'http-status-codes';
 import {createJWT, fillDTO} from '../../utils/common.js';
 import UserResponse from './response/user.response.js';
+import {RouteParams, RouteFieldNames} from './user.enum.js';
 import {ConfigInterface} from '../../common/config/config.interface.js';
 import LoginUserDto from './dto/login-user.dto.js';
 import {ValidateDtoMiddleware} from '../../common/middlewares/validate-dto.middleware.js';
@@ -19,6 +20,7 @@ import LoggedUserResponse from './response/logged-user.response.js';
 import {JWT_ALGORITM} from './user.constant.js';
 import UploadUserAvatarResponse from './response/upload-user-avatar.response.js';
 import { PrivateRouteMiddleware } from '../../common/middlewares/private-route.middleware.js';
+
 
 @injectable()
 export default class UserController extends Controller {
@@ -48,8 +50,8 @@ export default class UserController extends Controller {
       handler: this.uploadAvatar,
       middlewares: [
         new PrivateRouteMiddleware(),
-        new ValidateObjectIdMiddleware('userId'),
-        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar'),
+        new ValidateObjectIdMiddleware(RouteParams.UserId ),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), RouteFieldNames.Avatar),
       ]
     });
     this.addRoute({
