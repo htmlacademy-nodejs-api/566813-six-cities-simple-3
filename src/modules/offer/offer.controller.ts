@@ -10,12 +10,13 @@ import HttpError from '../../common/errors/http-error.js';
 import {OfferServiceInterface} from './offer-service.interface.js';
 import {fillDTO} from '../../utils/common.js';
 import OfferResponse from './response/offer.response.js';
+import {RouteParams, RouteFieldNames} from './offer.enum.js';
 import CreateOfferDto from './dto/create-offer.dto.js';
 import UpdateOfferDto from './dto/update-offer.dto.js';
 import {CommentServiceInterface} from '../comment/comment-service.interface.js';
 import CommentResponse from '../comment/response/comment.response.js';
-import { ValidateObjectIdMiddleware } from '../../common/middlewares/validate-objectid.middleware.js';
-import { ValidateDtoMiddleware } from '../../common/middlewares/validate-dto.middleware.js';
+import {ValidateObjectIdMiddleware} from '../../common/middlewares/validate-objectid.middleware.js';
+import {ValidateDtoMiddleware} from '../../common/middlewares/validate-dto.middleware.js';
 import {DocumentExistsMiddleware} from '../../common/middlewares/document-exists.middleware.js';
 import {PrivateRouteMiddleware} from '../../common/middlewares/private-route.middleware.js';
 import {ConfigInterface} from '../../common/config/config.interface.js';
@@ -27,6 +28,7 @@ type ParamsGetOffer = {
   offerId: string;
   files: string;
 }
+
 
 @injectable()
 export default class OfferController extends Controller {
@@ -44,8 +46,8 @@ export default class OfferController extends Controller {
       method: HttpMethod.Get,
       handler: this.show,
       middlewares: [
-        new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', RouteParams.OfferId)
       ]
     });
     this.addRoute({path: '/', method: HttpMethod.Get, handler: this.index});
@@ -63,8 +65,8 @@ export default class OfferController extends Controller {
       handler: this.delete,
       middlewares: [
         new PrivateRouteMiddleware(),
-        new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', RouteParams.OfferId)
       ]
     });
     this.addRoute({
@@ -73,9 +75,9 @@ export default class OfferController extends Controller {
       handler: this.update,
       middlewares: [
         new PrivateRouteMiddleware(),
-        new ValidateObjectIdMiddleware('offerId'),
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
         new ValidateDtoMiddleware(UpdateOfferDto),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')
+        new DocumentExistsMiddleware(this.offerService, 'Offer', RouteParams.OfferId)
       ]
     });
     this.addRoute({
@@ -83,8 +85,8 @@ export default class OfferController extends Controller {
       method: HttpMethod.Get,
       handler: this.getComments,
       middlewares: [
-        new ValidateObjectIdMiddleware('offerId'),
-        new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId')
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
+        new DocumentExistsMiddleware(this.offerService, 'Offer', RouteParams.OfferId)
       ]
     });
     this.addRoute({
@@ -93,8 +95,8 @@ export default class OfferController extends Controller {
       handler: this.uploadPreviewImage,
       middlewares: [
         new PrivateRouteMiddleware(),
-        new ValidateObjectIdMiddleware('offerId'),
-        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'previewImage')
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), RouteFieldNames.PreviewImage)
       ]
     });
     this.addRoute({
@@ -103,8 +105,8 @@ export default class OfferController extends Controller {
       handler: this.uploadDetailImages,
       middlewares: [
         new PrivateRouteMiddleware(),
-        new ValidateObjectIdMiddleware('offerId'),
-        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'detailImages')
+        new ValidateObjectIdMiddleware(RouteParams.OfferId),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), RouteFieldNames.DetailImages)
       ]
     });
   }

@@ -5,33 +5,27 @@ import { UserType } from '../../types/user-types.type.js';
 import { generateRandomValue, getRandomItem, getRandomItems } from '../../utils/random.js';
 import { OfferGeneratorInterface } from './offer-generator.interface.js';
 
-const DETAIL_IMAGES_NUMBER = 6;
+const enum GenerateOptions {
+  DetailImagesNumber = 6,
+  MinPrice = 100,
+  MaxPrice = 100000,
+  FirstMonthDay = 1,
+  LastMonthDay = 31,
+  False = 0,
+  True = 1,
+  MinRate = 1,
+  MaxRate = 5,
+  MinRoomsNumber = 1,
+  MaxRoomsNumber = 8,
+  MinGuestsNumber = 1,
+  MaxGuestsnumber = 10,
+  MinCommentsNumber = 0,
+  MaxCommentsNumber = 500,
+  MinGeographicalDegrees = 0,
+  MaxGeographicalDegrees = 90,
+  PasswordSample = 'testpassword'
+}
 
-const MIN_PRICE = 100;
-const MAX_PRICE = 100000;
-
-const FIRST_MONTH_DAY = 1;
-const LAST_MONTH_DAY = 31;
-
-const FALSE = 0;
-const TRUE = 1;
-
-const MIN_RATE = 1;
-const MAX_RATE = 5;
-
-const MIN_ROOMS_NUMBER = 1;
-const MAX_ROOMS_NUMBER = 8;
-
-const MIN_GUESTS_NUMBER = 1;
-const MAX_GUESTS_NUMBER = 10;
-
-const MIN_COMMENTS_NUMBER = 0;
-const MAX_COMMENTS_NUMBER = 500;
-
-const MIN_GEOGRAPHICAL_DEGREES = 0;
-const MAX_GEOGRAPHICAL_DEGREES = 90;
-
-const PASSWORD_SAMPLE = 'testpassword';
 
 export default class OfferGenerator implements OfferGeneratorInterface {
   constructor(private readonly mockData: MockData) {}
@@ -39,26 +33,26 @@ export default class OfferGenerator implements OfferGeneratorInterface {
   public generate(): string {
     const title = getRandomItem<string>(this.mockData.titles);
     const description = getRandomItem<string>(this.mockData.descriptions);
-    const postDate = dayjs().subtract(generateRandomValue(FIRST_MONTH_DAY, LAST_MONTH_DAY), 'day').toISOString();
+    const postDate = dayjs().subtract(generateRandomValue(GenerateOptions.FirstMonthDay, GenerateOptions.LastMonthDay), 'day').toISOString();
     const city = getRandomItem<string>(this.mockData.cities);
     const previewImage = getRandomItem<string>(this.mockData.previewImages);
-    const detailImages = this.mockData.detailImages.slice(0, DETAIL_IMAGES_NUMBER).join(';');
-    const isPremium = Boolean(generateRandomValue(FALSE, TRUE)).toString();
-    const rating = generateRandomValue(MIN_RATE, MAX_RATE).toString();
+    const detailImages = this.mockData.detailImages.slice(0, GenerateOptions.DetailImagesNumber).join(';');
+    const isPremium = Boolean(generateRandomValue(GenerateOptions.False, GenerateOptions.True)).toString();
+    const rating = generateRandomValue(GenerateOptions.MinRate, GenerateOptions.MaxRate).toString();
     const offerType = Object.keys(OfferType)[generateRandomValue(0, Object.keys(OfferType).length - 1)];
-    const roomsNumber = generateRandomValue(MIN_ROOMS_NUMBER, MAX_ROOMS_NUMBER).toString();
-    const guestsNumber = generateRandomValue(MIN_GUESTS_NUMBER, MAX_GUESTS_NUMBER).toString();
-    const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
+    const roomsNumber = generateRandomValue(GenerateOptions.MinRoomsNumber, GenerateOptions.MaxRoomsNumber).toString();
+    const guestsNumber = generateRandomValue(GenerateOptions.MinGuestsNumber, GenerateOptions.MaxGuestsnumber).toString();
+    const price = generateRandomValue(GenerateOptions.MinPrice, GenerateOptions.MaxPrice).toString();
     const features = getRandomItems<string>(this.mockData.features).join(';');
     const name = getRandomItem<string>(this.mockData.names);
     const email = getRandomItem<string>(this.mockData.emails);
     const avatarPath = getRandomItem<string>(this.mockData.avatarPaths);
-    const password = PASSWORD_SAMPLE;
+    const password = GenerateOptions.PasswordSample;
     const userType = Object.keys(UserType)[generateRandomValue(0, Object.keys(UserType).length - 1)];
-    const commentsNumber = generateRandomValue(MIN_COMMENTS_NUMBER, MAX_COMMENTS_NUMBER).toString();
+    const commentsNumber = generateRandomValue(GenerateOptions.MinCommentsNumber, GenerateOptions.MaxCommentsNumber).toString();
     const commentText = getRandomItem<string>(this.mockData.commentsText);
-    const locationLatitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
-    const locationLongitude = generateRandomValue(MIN_GEOGRAPHICAL_DEGREES, MAX_GEOGRAPHICAL_DEGREES, 6).toString();
+    const locationLatitude = generateRandomValue(GenerateOptions.MinGeographicalDegrees, GenerateOptions.MaxGeographicalDegrees, 6).toString();
+    const locationLongitude = generateRandomValue(GenerateOptions.MinGeographicalDegrees, GenerateOptions.MaxGeographicalDegrees, 6).toString();
     return [
       title,
       description,
